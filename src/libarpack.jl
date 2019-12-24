@@ -72,7 +72,7 @@ function aupd_wrapper(T, matvecA!::Function, matvecB::Function, solveSI::Functio
             naupd(ido, bmat, n, which, nev, TOL, resid, ncv, v, n,
                   iparam, ipntr, workd, workl, lworkl, info)
         end
-        if info[] != 0
+        if info[] < 0
             throw(ARPACKException(info[]))
         end
 
@@ -156,7 +156,7 @@ function eupd_wrapper(T, n::Integer, sym::Bool, cmplx::Bool, bmat::String,
         neupd(ritzvec, howmny, select, d, v, ldv, sigmar, workev,
               bmat, n, which, nev, TOL, resid, ncv, v, ldv,
               iparam, ipntr, workd, workl, lworkl, rwork, info)
-        if info[] != 0
+        if info[] < 0
             throw(ARPACKException(info[]))
         end
 
@@ -168,7 +168,7 @@ function eupd_wrapper(T, n::Integer, sym::Bool, cmplx::Bool, bmat::String,
         seupd(ritzvec, howmny, select, d, v, ldv, sigmar,
               bmat, n, which, nev, TOL, resid, ncv, v, ldv,
               iparam, ipntr, workd, workl, lworkl, info)
-        if info[] != 0
+        if info[] < 0
             throw(ARPACKException(info[]))
         end
 
@@ -185,7 +185,7 @@ function eupd_wrapper(T, n::Integer, sym::Bool, cmplx::Bool, bmat::String,
         neupd(ritzvec, howmny, select, dr, di, v, ldv, sigmar, sigmai,
               workev, bmat, n, which, nev, TOL, resid, ncv, v, ldv,
               iparam, ipntr, workd, workl, lworkl, info)
-        if info[] != 0
+        if info[] < 0
             throw(ARPACKException(info[]))
         end
         evec = complex.(Matrix{T}(undef, n, nev+1), Matrix{T}(undef, n, nev+1))
